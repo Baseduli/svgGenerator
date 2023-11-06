@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-inquirer
-prompt([
+async function createSVG() {
+const answers = await inquirer.prompt([
     {
         type: 'list',
         name: 'shape',
@@ -33,8 +33,13 @@ prompt([
 
     const svgString = svg.generateSVG();
 
-    fs.writeFile('sample.svg', svgString, (err) => {
-        if (err) throw err;
+    try {
+         fs.writeFile('sample.svg', svgString);
         console.log('The file has been saved!');
-    });
-});
+    } catch (err) {
+        console.error('Error saving file:', err.message);
+    }
+})
+}
+
+createSVG();
