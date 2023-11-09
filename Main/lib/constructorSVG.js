@@ -1,23 +1,37 @@
-const createSVG = require('./CreateSVG.js');
-createSVG();
 class SVGGenerator {
     constructor() {
-        // Assume canvas and group are created here
-        this.canvas = {};  // Placeholder
-        this.group = {};  // Placeholder
+        this.elements = [];
     }
 
-    addText(text) {
-        // Assume text is added to group here
+    addText(text, textColor) {
+        const svgText = `<text fill="${textColor}">${text}</text>`;
+        this.elements.push(svgText);
     }
 
     addShape(shape, shapeColor) {
-        // Assume shape is added to group here
+        let svgShape;
+        switch (shape) {
+            case 'Circle':
+                svgShape = `<circle r="50" fill="${shapeColor}"></circle>`;
+                break;
+            case 'Square':
+                svgShape = `<rect width="100" height="100" fill="${shapeColor}"></rect>`;
+                break;
+            case 'Rectangle':
+                svgShape = `<rect width="200" height="100" fill="${shapeColor}"></rect>`;
+                break;
+            case 'Triangle':
+                svgShape = `<polygon points="100,0 0,100 200,100" fill="${shapeColor}"></polygon>`;
+                break;
+
+            default:
+                svgShape = ''; // Default case if shape is not recognized
+        }
+        this.elements.push(svgShape);
     }
 
     generateSVG() {
-        // Assume SVG string is generated from canvas and returned here
-        return '<svg>...</svg>';  // Placeholder
+        return `<svg>${this.elements.join('')}</svg>`;
     }
 }
 

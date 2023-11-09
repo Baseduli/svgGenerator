@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs').promises;
+const SVGGenerator = require('./constructorSVG.js');
 
 async function createSVG() {
     try {
@@ -29,11 +30,12 @@ async function createSVG() {
             },
         ]);
 
-        const SVG = require('./SVG.js');
-        const svg = new SVG(answers.shape, answers.shapeColor, answers.textColor, answers.text);
-        const svgString = svg.generateSVG();
+        const svgGen = new SVGGenerator();
+        svgGen.addText(answers.text, answers.textColor);
+        svgGen.addShape(answers.shape, answers.shapeColor);
+        const svgString = svgGen.generateSVG();
 
-        await fs.writeFile('sample.svg', svgString);  // Await the writeFile promise
+        await fs.writeFile('sample.svg', svgString);
         console.log('The file has been saved!');
 
     } catch (err) {
