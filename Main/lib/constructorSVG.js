@@ -18,7 +18,7 @@ class SVGGenerator {
                 svgShape = `<rect width="100" height="100" fill="${shapeColor}"></rect>`;
                 break;
             case 'Rectangle':
-                svgShape = `<rect width="200" height="100" fill="${shapeColor}"></rect>`;
+                svgShape = `<rect width="300" height="200" fill="${shapeColor}"></rect>`;
                 break;
             case 'Triangle':
                 svgShape = `<polygon points="100,0 0,100 200,100" fill="${shapeColor}"></polygon>`;
