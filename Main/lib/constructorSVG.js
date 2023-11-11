@@ -1,3 +1,8 @@
+const Triangle = require('./triangle');
+const Square = require('./square');
+const Rectangle = require('./rectangle');
+const Circle = require('./circle');
+
 class SVGGenerator {
     constructor() {
         this.elements = [];
@@ -8,30 +13,31 @@ class SVGGenerator {
         this.elements.push(svgText);
     }
 
-    addShape(shape, shapeColor) {
-        let svgShape;
-        switch (shape) {
+    addShape(shapeType, shapeColor) {
+        let shape;
+        switch (shapeType) {
             case 'Circle':
-                svgShape = `<circle r="50" fill="${shapeColor}"></circle>`;
+                shape = new Circle(shapeColor);
                 break;
             case 'Square':
-                svgShape = `<rect width="100" height="100" fill="${shapeColor}"></rect>`;
+                shape = new Square(shapeColor);
                 break;
             case 'Rectangle':
-                svgShape = `<rect width="300" height="200" fill="${shapeColor}"></rect>`;
+                shape = new Rectangle(shapeColor);
                 break;
             case 'Triangle':
-                svgShape = `<polygon points="100,0 0,100 200,100" fill="${shapeColor}"></polygon>`;
+                shape = new Triangle(shapeColor);
                 break;
-
             default:
-                svgShape = ''; // Default case if shape is not recognized
+                shape = null; // Default case if shape is not recognized
         }
-        this.elements.push(svgShape);
+        if (shape) {
+            this.elements.push(shape.render());
+        }
     }
 
     generateSVG() {
-        return `<svg>${this.elements.join('')}</svg>`;
+        return `<svg version="1.1" xmlns="https://www.w3.org/2000/svg" width="300" height="200">${this.elements.join('')}</svg>`;
     }
 }
 
