@@ -7,11 +7,11 @@ class SVGGenerator {
     constructor() {
         this.elements = [];
     }
-
     addText(text, textColor) {
-        const svgText = `<text fill="${textColor}">${text}</text>`;
+        const svgText = `<text x="150" y="100" text-anchor="middle" dominant-baseline="middle" fill="${textColor}" font-size="24">${text}</text>`;
         this.elements.push(svgText);
     }
+
 
     addShape(shapeType, shapeColor) {
         let shape;
@@ -37,7 +37,7 @@ class SVGGenerator {
     }
 
     generateSVG() {
-        return `<svg version="1.1" xmlns="https://www.w3.org/2000/svg" width="300" height="200">${this.elements.join('')}</svg>`;
+        return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${this.elements.join('')}</svg>`;
     }
 }
 
